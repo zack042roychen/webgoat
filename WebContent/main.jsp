@@ -11,7 +11,7 @@ AbstractLesson currentLesson = webSession.getCurrentLesson();
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-<title><%=currentLesson.getTitle()%></title>
+<title><%=org.apache.commons.text.StringEscapeUtils.escapeHtml4(currentLesson.getTitle())%></title>
 <link rel="stylesheet" href="css/webgoat.css" type="text/css" />
 <link rel="stylesheet" href="css/lesson.css" type="text/css" />
 <link rel="stylesheet" href="css/menu.css" type="text/css" />
@@ -56,7 +56,7 @@ StringBuffer buildList = new StringBuffer();
         if (iter1.hasNext())
         		buildList.append(",");
     }%>
-<body class="page" onload="setMenuMagic1(10,40,10,'menubottom',<%=buildList%>);trigMM1url('menu',1);MM_preloadImages('images/buttons/hintLeftOver.jpg','images/buttons/hintOver.jpg','images/buttons/hintRightOver.jpg','images/buttons/paramsOver.jpg','images/buttons/htmlOver.jpg','images/buttons/cookiesOver.jpg','images/buttons/javaOver.jpg','images/buttons/plansOver.jpg','images/buttons/logout.jpg','images/buttons/helpOver.jpg'); initIframe();">
+<body class="page" onload="setMenuMagic1(10,40,10,'menubottom',<%=org.apache.commons.text.StringEscapeUtils.escapeHtml4(buildList)%>);trigMM1url('menu',1);MM_preloadImages('images/buttons/hintLeftOver.jpg','images/buttons/hintOver.jpg','images/buttons/hintRightOver.jpg','images/buttons/paramsOver.jpg','images/buttons/htmlOver.jpg','images/buttons/cookiesOver.jpg','images/buttons/javaOver.jpg','images/buttons/plansOver.jpg','images/buttons/logout.jpg','images/buttons/helpOver.jpg'); initIframe();">
 
 	<div id="wrap">
 	<%
@@ -68,7 +68,7 @@ StringBuffer buildList = new StringBuffer();
 		{
 		    Category category = (Category)iter2.next();
 		%>
-		<div id="<%=menuPrefix + category.getRanking()%>" style="position:absolute; left:30px; top:<%=topCord%>px; width:160px; z-index:<%=zIndex%>"><a href="javascript:;" onclick="trigMenuMagic1('<%=menuPrefix + category.getRanking()%>',1);return false" onfocus="if(this.blur)this.blur()"><img src="images/menu_images/1x1.gif" width="1" height=1"20" name="mbut<%=category.getRanking()%>" border="0" alt=""/><%=category.getName()%></a></div>
+		<div id="<%=org.apache.commons.text.StringEscapeUtils.escapeHtml4(menuPrefix + category.getRanking())%>" style="position:absolute; left:30px; top:<%=org.apache.commons.text.StringEscapeUtils.escapeHtml4(topCord)%>px; width:160px; z-index:<%=org.apache.commons.text.StringEscapeUtils.escapeHtml4(zIndex)%>"><a href="javascript:;" onclick="trigMenuMagic1('<%=org.apache.commons.text.StringEscapeUtils.escapeHtml4(menuPrefix + category.getRanking())%>',1);return false" onfocus="if(this.blur)this.blur()"><img src="images/menu_images/1x1.gif" width="1" height=1"20" name="mbut<%=org.apache.commons.text.StringEscapeUtils.escapeHtml4(category.getRanking())%>" border="0" alt=""/><%=org.apache.commons.text.StringEscapeUtils.escapeHtml4(category.getName())%></a></div>
 		<%
 		topCord=topCord + 30;
 		zIndex=zIndex + 1;
@@ -83,7 +83,7 @@ StringBuffer buildList = new StringBuffer();
 				List lessons = webSession.getLessons(category);
 			    Iterator iter4 = lessons.iterator();
 			%>    
-		<div id="submenu<%=category.getRanking()%>" class="pviimenudiv" style="position:absolute; left:200px; top:<%=topSubMenu%>px; width:150px; visibility: hidden; z-index:<%=zIndex%>">
+		<div id="submenu<%=org.apache.commons.text.StringEscapeUtils.escapeHtml4(category.getRanking())%>" class="pviimenudiv" style="position:absolute; left:200px; top:<%=org.apache.commons.text.StringEscapeUtils.escapeHtml4(topSubMenu)%>px; width:150px; visibility: hidden; z-index:<%=org.apache.commons.text.StringEscapeUtils.escapeHtml4(zIndex)%>">
 	  		<table width="150" border="0" cellspacing="6" cellpadding="0"><%
 
 	  		topSubMenu=topSubMenu+30;
@@ -94,7 +94,7 @@ StringBuffer buildList = new StringBuffer();
 		    		AbstractLesson lesson = (AbstractLesson)iter4.next();
 		    
 			%><tr>
-	      		<td><%=(lesson.isCompleted(webSession) ? lessonComplete : "")%><a href="<%=lesson.getLink()%>&menu=<%=category.getRanking()%>"><%=lesson.getTitle()%></a></td>
+	      		<td><%=org.apache.commons.text.StringEscapeUtils.escapeHtml4((lesson.isCompleted(webSession) ? lessonComplete : ""))%><a href="<%=org.apache.commons.text.StringEscapeUtils.escapeHtml4(lesson.getLink())%>&menu=<%=org.apache.commons.text.StringEscapeUtils.escapeHtml4(category.getRanking())%>"><%=org.apache.commons.text.StringEscapeUtils.escapeHtml4(lesson.getTitle())%></a></td>
 	    		</tr><%
 			}
 			%>
@@ -105,34 +105,34 @@ StringBuffer buildList = new StringBuffer();
 		<div id="topRight">
 	  		<div align="right"><a href="attack?action=Logout" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('logout','','images/buttons/logoutOver.jpg',1)"><img src="images/buttons/logout.jpg" alt="LogOut" name="logout" width="45" height="22" border="0" id="logout" /></a>  <a href="#getFAQ()" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('help','','images/buttons/helpOver.jpg',1)"><img src="images/buttons/help.jpg" alt="Help" name="help" width="22" height="22" border="0" id="help" /></a></div>
 		</div>
-			<div id="lessonTitle" align="right"><%=currentLesson.getTitle()%></div>
+			<div id="lessonTitle" align="right"><%=org.apache.commons.text.StringEscapeUtils.escapeHtml4(currentLesson.getTitle())%></div>
 			<div id="hMenuBar">
 				<% 
 				if (webSession.isAuthorizedInLesson(webSession.getRole(), WebSession.SHOWHINTS))
 				{
 				%>
-				<a href="attack?show=PreviousHint&menu=<%=menu%>" target="_top" onclick="MM_nbGroup('down','group1','hintLeft','',1)" 
+				<a href="attack?show=PreviousHint&menu=<%=org.apache.commons.text.StringEscapeUtils.escapeHtml4(menu)%>" target="_top" onclick="MM_nbGroup('down','group1','hintLeft','',1)" 
 				onmouseover="MM_nbGroup('over','hintLeft','images/buttons/hintLeftOver.jpg','',1)" 
 				onmouseout="MM_nbGroup('out')">
 				<img src="images/buttons/hintLeft.jpg" alt="Previous Hint" name="hintLeft" width="22" height="20" border="0" id="hintLeft"/>
 				</a>
-				<a href="attack?show=NextHint&menu=<%=menu%>" target="_top" onclick="MM_nbGroup('down','group1','hint','',1)" 
+				<a href="attack?show=NextHint&menu=<%=org.apache.commons.text.StringEscapeUtils.escapeHtml4(menu)%>" target="_top" onclick="MM_nbGroup('down','group1','hint','',1)" 
 				onmouseover="MM_nbGroup('over','hint','images/buttons/hintOver.jpg','',1)" 
 				onmouseout="MM_nbGroup('out')">
 				<img src="images/buttons/hint.jpg" alt="Hints" name="hint" width="35" height="20" border="0" id="hint"/>
 				</a>
-				<a href="attack?show=NextHint&menu=<%=menu%>" target="_top" onclick="MM_nbGroup('down','group1','hintRight','',1)" 
+				<a href="attack?show=NextHint&menu=<%=org.apache.commons.text.StringEscapeUtils.escapeHtml4(menu)%>" target="_top" onclick="MM_nbGroup('down','group1','hintRight','',1)" 
 				onmouseover="MM_nbGroup('over','hintRight','images/buttons/hintRightOver.jpg','',1)" 
 				onmouseout="MM_nbGroup('out')">
 				<img src="images/buttons/hintRight.jpg" alt="Next Hint" name="hintRight" width="20" height="20" border="0" id="hintRight"/>
 				</a>
 				<%}%>
-				<a href="attack?show=Params&menu=<%=menu%>" target="_top" onclick="MM_nbGroup('down','group1','params','',1)" 
+				<a href="attack?show=Params&menu=<%=org.apache.commons.text.StringEscapeUtils.escapeHtml4(menu)%>" target="_top" onclick="MM_nbGroup('down','group1','params','',1)" 
 				onmouseover="MM_nbGroup('over','params','images/buttons/paramsOver.jpg','',1)" 
 				onmouseout="MM_nbGroup('out')">
 				<img src="images/buttons/params.jpg" alt="Show Params" name="attack?show=Params" width="92" height="20" border="0" id="params"/>
 				</a>
-				<a href="attack?show=Cookies&menu=<%=menu%>" target="_top" onclick="MM_nbGroup('down','group1','cookies','',1)" 
+				<a href="attack?show=Cookies&menu=<%=org.apache.commons.text.StringEscapeUtils.escapeHtml4(menu)%>" target="_top" onclick="MM_nbGroup('down','group1','cookies','',1)" 
 				onmouseover="MM_nbGroup('over','cookies','images/buttons/cookiesOver.jpg','',1)" 
 				onmouseout="MM_nbGroup('out')">
 				<img src="images/buttons/cookies.jpg" alt="Show Cookies" name="cookies" width="104" height="20" border="0" id="cookies"/>
@@ -160,7 +160,7 @@ StringBuffer buildList = new StringBuffer();
 			    if (currentLesson != null)
 			    {
 			    	%>
-			    	<div id="reset" class="info"><a href="<%=webSession.getRestartLink()%>">Restart this Lesson</a></div>
+			    	<div id="reset" class="info"><a href="<%=org.apache.commons.text.StringEscapeUtils.escapeHtml4(webSession.getRestartLink())%>">Restart this Lesson</a></div>
 	    			<%
 	    			}
 
@@ -191,13 +191,13 @@ StringBuffer buildList = new StringBuffer();
 						out.println(printCookies);
 					}
 				}%>
-				<div id="lessonPlans" style="visibility:hidden; height:1px; position:absolute; left:260px; top:130px; width:425px; z-index:105;"><%=currentLesson.getLessonPlan(webSession) %>
+				<div id="lessonPlans" style="visibility:hidden; height:1px; position:absolute; left:260px; top:130px; width:425px; z-index:105;"><%=org.apache.commons.text.StringEscapeUtils.escapeHtml4(currentLesson.getLessonPlan(webSession))%>
 				<br/>
 				<br/>
 				<a href="javascript:toggle('lessonPlans')" target="_top" onclick="MM_nbGroup('down','group1','plans','',1)">Close this Window</a>
 				</div>
-				<div id="lessonContent"><%=webSession.getInstructions()%></div>
-				<div id="message" class="info"><%=webSession.getMessage()%></div>
+				<div id="lessonContent"><%=org.apache.commons.text.StringEscapeUtils.escapeHtml4(webSession.getInstructions())%></div>
+				<div id="message" class="info"><%=org.apache.commons.text.StringEscapeUtils.escapeHtml4(webSession.getMessage())%></div>
 	
 			<%
 			if (currentLesson.getTemplatePage(webSession) != null)
@@ -205,13 +205,13 @@ StringBuffer buildList = new StringBuffer();
 				System.out.println("Main.jsp - current lesson: " + currentLesson.getName() );
 				System.out.println("         - template Page: " + currentLesson.getTemplatePage(webSession));
 			%>
-			<jsp:include page="<%=currentLesson.getTemplatePage(webSession)%>" />
+			<jsp:include page="<%=org.apache.commons.text.StringEscapeUtils.escapeHtml4(currentLesson.getTemplatePage(webSession))%>" />
 			<%
 			}
 			else
 			{
 			%>
-			<div id="lessonContent"><%=currentLesson.getContent()%></div>
+			<div id="lessonContent"><%=org.apache.commons.text.StringEscapeUtils.escapeHtml4(currentLesson.getContent())%></div>
 			<%
 			}
 			%>
